@@ -1,8 +1,22 @@
 \documentclass[12pt, letterpaper]{article}
 
-\begin{document}\thispagestyle{empty}\sloppy\sloppypar\raggedbottom\frenchspacing
+% text formatting
+\setlength{\baselineskip}{2.4ex}
+\thispagestyle{empty}\sloppy\sloppypar\raggedbottom\frenchspacing
 
-\section*{The Jump: A fully probabilistic data-driven model for stellar spectra}
+% text macros
+\newcommand{\project}[1]{\textsl{{#1}}}
+\newcommand{\acronym}[1]{{\small{#1}}}
+\newcommand{\sectionname}{Section}
+
+% math macros
+\newcommand{\Teff}{{T_{\mathrm{eff}}}}
+\newcommand{\logg}{{\log g}}
+
+\begin{document}
+
+\section*{The Jump: A fully probabilistic data-driven \\
+model for stellar spectra}
 
 \noindent
 DWH, others
@@ -10,25 +24,25 @@ DWH, others
 \paragraph{Abstract:}
 Physical models of stellar spectra have been extremely successful
 at delivering parameters and chemical abundances of stars.
-One data-driven model, \textsl{The Cannon}, has been even more
+One data-driven model, \project{The Cannon}, has been even more
 successful; being data-driven, it is constructed to fit stellar
 spectra beautifully.
-\textsl{The Cannon} has delivered the most precise chemical abundances ever for
+\project{The Cannon} has delivered the most precise chemical abundances ever for
 stars, as validated by the consistency of the chemical abundances
 it reports for stars in open clusters.
 Here we generalize this model from a point estimate to a fully
 probabilistic model.
-\textsl{The Jump} has all of the flexibility and good design of
+\project{The Jump} has all of the flexibility and good design of
 its predecessor, but fully marginalizes out uncertainties in its
 internal parameters when it delivers stellar parameters and
 chemical abundances (collectively ``labels'').
-Acting on the \textsl{SDSS-IV} \textsl{APOGEE} data, the model
+Acting on the \project{\acronym{SDSS-IV}} \project{\acronym{APOGEE2}} data, the model
 has 6.7 million parameters; the method relies on a custom Gibbs sampling
 scheme, and an abundance of compute time.
 Being fully probabilistic, it can propagate training-set label uncertainties,
 spectral noise, and training-set objects with missing label or spectral data.
-We show that \textsl{The Jump} provides labels that are better than those
-from \textsl{The Cannon}, but also reasonable label uncertainties.
+We show that \project{The Jump} provides labels that are better than those
+from \project{The Cannon}, but also reasonable label uncertainties.
 It improves its predecessor both because it marginalizes out internal
 uncertainties, and because it doesn't require a training set on which
 hard cuts have been made in signal-to-noise and label completeness.
@@ -37,10 +51,39 @@ hard cuts have been made in signal-to-noise and label completeness.
 
 \section{Assumptions and method}
 
-Here are the assumptions underlying \textsl{The Jump}:
-\begin{itemize}\itemskip=0ex
-\item foo
-\item bar
+The assumptions underlying \project{The Jump} are in the following
+itemized list. These assumptions are all questionable, but they form
+the basis for the method. That is, the method is designed to be correct
+in a hypothetical world in which these assumptions all hold. We will
+return below in \sectionname~DWH to discuss what happens as these
+assumptions are softened or fail.
+\begin{itemize}\itemsep0ex
+\item There are $N$ stars $n$, each of which has a
+  continuum-normalized (or, really, just consistently normalized)
+  spectral flux $y_{nm}$ observed at each of $M$ rest-frame
+  wavelengths $\lambda_m$. If a star has been observed multiple times,
+  we will assume (for now) that the multiple observations have been
+  combined into a single effective observation.
+\item For each pixel value $y_{nm}$ of each spectrum, there is a known
+  noise variance $\sigma^2_{nm}$ that describes the noise contributing
+  to this pixel. These noise contributions are Gaussian, independent,
+  and the variances are correctly estimated.
+\item The expectation value for the flux $y_{nm}$ for star $n$ at
+  wavelength $\lambda_m$ is set by a small number of latent labels
+  $x_{nk}$, which are the effective temperature $\Teff_n$,
+  surface gravity $\logg_n$, and chemical abundances for star $n$.
+  In detail, the expectation value for $y_{nm}$ varies quadratically
+  with the labels.
+\item For at least some stars $n$, some of the labels $x_{nk}$ have
+  been noisily observed, with Gaussian noise with known (and correctly
+  known) variances $\Sigma^2_{nk}$. We will differentiate the observed
+  and latent labels by denoting the observed labels $\ell_{nk}$.
+\item We have various prior expectations about the latent parameters.
+  One is that the derivatives of the spectral expectations with
+  respect to the true labels ought to be very sparse: Most labels are
+  not involved at most wavelengths. Another is that the stellar
+  parameters $\Teff, \logg$ have joint values that are possible (or
+  close to possible) given models of stellar structure.
 \end{itemize}
 
 \end{document}
