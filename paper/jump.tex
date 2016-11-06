@@ -2,6 +2,45 @@
 
 \begin{document}\thispagestyle{empty}\sloppy\sloppypar\raggedbottom\frenchspacing
 
-Hello World!
+\section*{The Jump: A fully probabilistic data-driven model for stellar spectra}
+
+\noindent
+DWH, others
+
+\paragraph{Abstract:}
+Physical models of stellar spectra have been extremely successful
+at delivering parameters and chemical abundances of stars.
+One data-driven model, \textsl{The Cannon}, has been even more
+successful; being data-driven, it is constructed to fit stellar
+spectra beautifully.
+\textsl{The Cannon} has delivered the most precise chemical abundances ever for
+stars, as validated by the consistency of the chemical abundances
+it reports for stars in open clusters.
+Here we generalize this model from a point estimate to a fully
+probabilistic model.
+\textsl{The Jump} has all of the flexibility and good design of
+its predecessor, but fully marginalizes out uncertainties in its
+internal parameters when it delivers stellar parameters and
+chemical abundances (collectively ``labels'').
+Acting on the \textsl{SDSS-IV} \textsl{APOGEE} data, the model
+has 6.7 million parameters; the method relies on a custom Gibbs sampling
+scheme, and an abundance of compute time.
+Being fully probabilistic, it can propagate training-set label uncertainties,
+spectral noise, and training-set objects with missing label or spectral data.
+We show that \textsl{The Jump} provides labels that are better than those
+from \textsl{The Cannon}, but also reasonable label uncertainties.
+It improves its predecessor both because it marginalizes out internal
+uncertainties, and because it doesn't require a training set on which
+hard cuts have been made in signal-to-noise and label completeness.
+
+\section{Introduction}
+
+\section{Assumptions and method}
+
+Here are the assumptions underlying \textsl{The Jump}:
+\begin{itemize}\itemskip=0ex
+\item foo
+\item bar
+\end{itemize}
 
 \end{document}
