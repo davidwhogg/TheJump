@@ -66,24 +66,27 @@ assumptions are softened or fail.
   combined into a single effective observation.
 \item For each pixel value $y_{nm}$ of each spectrum, there is a known
   noise variance $\sigma^2_{nm}$ that describes the noise contributing
-  to this pixel. These noise contributions are Gaussian, independent,
-  and the variances are correctly estimated.
+  to this pixel. These noise contributions can be treated as Gaussian
+  and independent, with correctly estimated variances.
 \item The expectation value for the flux $y_{nm}$ for star $n$ at
-  wavelength $\lambda_m$ is set by a small number of latent labels
+  wavelength $\lambda_m$ is set by a small number $K$ of latent labels
   $x_{nk}$, which are the effective temperature $\Teff_n$,
   surface gravity $\logg_n$, and chemical abundances for star $n$.
   In detail, the expectation value for $y_{nm}$ varies quadratically
-  with the labels.
-\item For at least some stars $n$, some of the labels $x_{nk}$ have
-  been noisily observed, with Gaussian noise with known (and correctly
-  known) variances $\Sigma^2_{nk}$. We will differentiate the observed
-  and latent labels by denoting the observed labels $\ell_{nk}$.
+  with the labels. (It would be a valuable extension to put a more
+  flexible model here, or a non-parametric model.)
+\item For at least some stars $n$, at least some of the labels
+  $x_{nk}$ have been noisily observed, with Gaussian noise with known
+  (and correctly known) variances $\Sigma^2_{nk}$. We will
+  differentiate the observed and latent labels by denoting the
+  observed labels $\ell_{nk}$.
 \item We have various prior expectations about the latent parameters.
   One is that the derivatives of the spectral expectations with
   respect to the true labels ought to be very sparse: Most labels are
   not involved at most wavelengths. Another is that the stellar
-  parameters $\Teff, \logg$ have joint values that are possible (or
-  close to possible) given models of stellar structure.
+  parameters $\Teff, \logg$ have joint values that are plausible
+  given models of stellar structure; that is, not all values of
+  $\Teff, \logg$ are plausible.
 \end{itemize}
 
 \end{document}
